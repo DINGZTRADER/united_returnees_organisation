@@ -1,6 +1,6 @@
 {
   "name": "united-returnees-organisation",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -10,6 +10,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.57.4",
     "next": "^15.5.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
