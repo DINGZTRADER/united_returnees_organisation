@@ -62,45 +62,32 @@ export default function Home() {
   return (
     <>
       <section className={heroStyles.hero}>
-        <div className={`container ${heroStyles.inner}`}>
-          <div className={heroStyles.copy}>
-            <span className={heroStyles.kicker}>United Returnees Organisation · Uganda</span>
-            <h1>Every return deserves a new beginning.</h1>
-            <p>
-              URO connects Ugandans returning from the diaspora with trusted information,
-              practical support, opportunity and a community that understands the journey.
-            </p>
-            <div className={heroStyles.actions}>
-              <Link className="button" href="/join">
-                Join URO — $100/year <Icon name="arrow" size={18} />
-              </Link>
-              <Link className={heroStyles.secondary} href="/contact">I need returnee support</Link>
-            </div>
-            <div className={heroStyles.audiences} aria-label="Who URO serves">
-              <span>Planning to return</span>
-              <span>Recently returned</span>
-              <span>Rebuilding in Uganda</span>
-            </div>
+        <img
+          className={heroStyles.image}
+          src="/images/uro/uro-team-office.webp"
+          alt="URO members and partners gathered at the organisation office in Kampala"
+        />
+        <div className={heroStyles.overlay} />
+
+        <div className={`container ${heroStyles.content}`}>
+          <span className={heroStyles.kicker}>For Ugandans planning to return — and those already home</span>
+          <h1>Every return deserves a new beginning.</h1>
+          <p>
+            URO connects Ugandans returning from the diaspora with trusted information,
+            practical support, opportunity and a community that understands the journey.
+          </p>
+
+          <div className={heroStyles.actions}>
+            <Link className={`button ${heroStyles.primary}`} href="/join">
+              Join URO — $100/year <Icon name="arrow" size={18} />
+            </Link>
+            <Link className={heroStyles.secondary} href="/contact">I need returnee support</Link>
           </div>
 
-          <div className={heroStyles.visual} aria-label="United Returnees Organisation community in Kampala">
-            <div className={heroStyles.flagLine} aria-hidden="true" />
-            <div className={heroStyles.mainPhoto}>
-              <img
-                src="/images/uro/uro-team-office.webp"
-                alt="URO members and partners gathered at the organisation office in Kampala"
-              />
-            </div>
-            <div className={heroStyles.secondaryPhoto}>
-              <img
-                src="/images/uro/uro-returnee-team.webp"
-                alt="URO team members wearing branded high-visibility vests"
-              />
-            </div>
-            <div className={heroStyles.caption}>
-              <strong>Return with a network behind you.</strong>
-              <span>Kampala-based support, community, trusted guidance and opportunity pathways.</span>
-            </div>
+          <div className={heroStyles.proof} aria-label="URO member pathways">
+            <span>Planning to return</span>
+            <span>Recently returned</span>
+            <span>Rebuilding in Uganda</span>
           </div>
         </div>
 
