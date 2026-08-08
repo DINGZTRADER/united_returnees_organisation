@@ -20,7 +20,7 @@ export function AdminApplications({ initialApplications }: { initialApplications
   const [busyId, setBusyId] = useState<string | null>(null);
   const [message, setMessage] = useState("");
 
-  async function review(id: string, status: "active" | "rejected") {
+  async function review(id: string, status: "approved" | "rejected") {
     setBusyId(id);
     setMessage("");
     const response = await fetch(`/api/admin/applications/${id}`, {
@@ -51,10 +51,10 @@ export function AdminApplications({ initialApplications }: { initialApplications
               <td><strong>{item.full_name}</strong><small>{item.email}<br />{item.phone}<br />{item.current_country}</small></td>
               <td>{item.return_status === "planning" ? "Planning" : "Returned"}<small>{item.district || "District not supplied"}</small></td>
               <td>{item.support_needs}</td>
-              <td><span className={`status-pill ${item.status === "active" ? "live" : ""}`}>{item.status}</span></td>
+              <td><span className={`status-pill ${item.status === "approved" ? "live" : ""}`}>{item.status}</span></td>
               <td>
                 <div className="table-actions">
-                  <button type="button" onClick={() => review(item.id, "active")} disabled={busyId === item.id || item.status === "active"}>Approve</button>
+                  <button type="button" onClick={() => review(item.id, "approved")} disabled={busyId === item.id || item.status === "approved"}>Approve</button>
                   <button type="button" onClick={() => review(item.id, "rejected")} disabled={busyId === item.id || item.status === "rejected"}>Reject</button>
                 </div>
               </td>
