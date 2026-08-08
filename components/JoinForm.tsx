@@ -4,6 +4,10 @@ import { FormEvent, useState } from "react";
 import { SITE } from "@/lib/site";
 import { createClient } from "@/lib/supabase/client";
 
+const PRODUCTION_SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://uro-modern-prototype.vercel.app"
+).replace(/\/$/, "");
+
 export function JoinForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -38,7 +42,7 @@ export function JoinForm() {
           full_name: application.full_name ?? "",
           phone: application.phone ?? "",
         },
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+        emailRedirectTo: `${PRODUCTION_SITE_URL}/auth/callback?next=/dashboard`,
       },
     });
 
