@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 
 const Review = z.object({
-  status: z.enum(["pending", "active", "rejected", "suspended"]),
+  status: z.enum(["pending", "approved", "rejected", "suspended"]),
   note: z.string().trim().max(1000).optional().default(""),
 });
 
@@ -17,22 +17,14 @@ export async function PATCH(
   }
 
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "Sign in required." }, { status: 401 });
 
   let payload: unknown;
-  try {
-    payload = await request.json();
-  } catch {
-    return NextResponse.json({ error: "Invalid request." }, { status: 400 });
-  }
+  try { payload = await request.json(); } catch { return NextResponse.json({ error: "Invalid request." }, { status: 400 }); }
 
   const parsed = Review.safeParse(payload);
-  if (!parsed.success) {
-    return NextResponse.json({ error: "Invalid review." }, { status: 422 });
-  }
+  if (!parsed.success) return NextResponse.json({ error: "Invalid review." }, { status: 422 });
 
   const { error } = await supabase.rpc("review_membership_application", {
     p_application_id: id,
@@ -40,9 +32,6 @@ export async function PATCH(
     p_note: parsed.data.note || null,
   });
 
-  if (error) {
-    return NextResponse.json({ error: "You are not authorised to review this application." }, { status: 403 });
-  }
-
+  if (error) return NextResponse.json({ error: "You are not authorised to review this application." }, { status: 403 });
   return NextResponse.json({ ok: true });
 }
