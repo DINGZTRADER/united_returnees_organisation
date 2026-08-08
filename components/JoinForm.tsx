@@ -11,11 +11,9 @@ export function JoinForm() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
-    const email = String(data.email ?? "").trim();
-    const password = String(data.password ?? "");
-    const confirmPassword = String(data.confirm_password ?? "");
+    const raw = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+    const { password, confirm_password: confirmPassword, ...application } = raw;
+    const email = (application.email ?? "").trim();
 
     if (password.length < 8) {
       setStatus("error");
@@ -37,8 +35,8 @@ export function JoinForm() {
       password,
       options: {
         data: {
-          full_name: String(data.full_name ?? ""),
-          phone: String(data.phone ?? ""),
+          full_name: application.full_name ?? "",
+          phone: application.phone ?? "",
         },
         emailRedirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
       },
@@ -50,17 +48,10 @@ export function JoinForm() {
       return;
     }
 
-    const payload = {
-      ...data,
-      user_id: authData.user.id,
-    };
-    delete payload.password;
-    delete payload.confirm_password;
-
     const response = await fetch("/api/membership", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ ...application, user_id: authData.user.id }),
     });
     const body = await response.json().catch(() => ({}));
 
