@@ -86,7 +86,7 @@ export default function Home() {
           priority
           fetchPriority="high"
           sizes="100vw"
-          quality={88}
+          quality={95}
         />
         <div className={heroStyles.overlay} />
 
@@ -165,7 +165,7 @@ export default function Home() {
             alt="URO members and partners gathered outdoors in Uganda"
             fill
             sizes="(max-width: 820px) 100vw, 58vw"
-            quality={84}
+            quality={92}
           />
         </div>
         <div className="story-panel">
@@ -194,7 +194,7 @@ export default function Home() {
                   alt={moment.alt}
                   fill
                   sizes={moment.sizes}
-                  quality={84}
+                  quality={92}
                 />
                 <figcaption>
                   <span className={galleryStyles.captionEyebrow}>{moment.eyebrow}</span>
