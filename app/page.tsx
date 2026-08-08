@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/Icons";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -5,67 +7,86 @@ import { READINESS, SITE, SUPPORT_PATHWAYS } from "@/lib/site";
 import galleryStyles from "./home-gallery.module.css";
 import heroStyles from "./home-hero.module.css";
 
-const COMMUNITY = "https://diasporaaffairs.go.ug/assets/images/slides/return1.jpg";
+export const metadata: Metadata = {
+  title: "Uganda Diaspora Returnee Support",
+  description:
+    "United Returnees Organisation helps Ugandans planning to return or already back home access reintegration support, community, employment, business and investment pathways.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "United Returnees Organisation — Return. Reconnect. Rebuild.",
+    description:
+      "Practical reintegration support and community for Ugandans returning home from the diaspora.",
+    url: "/",
+    images: [
+      {
+        url: "/images/uro/uro-team-office.webp",
+        alt: "United Returnees Organisation members and partners gathered in Kampala",
+      },
+    ],
+  },
+};
 
 const URO_MOMENTS = [
   {
-    src: "/images/uro/uro-team-office.webp",
-    alt: "URO members and partners gathered in the organisation office",
-    label: "Community & connection",
-    className: galleryStyles.landscape,
-  },
-  {
     src: "/images/uro/uro-community-meeting.webp",
-    alt: "URO members taking part in a community meeting",
-    label: "Returnees in conversation",
-    className: galleryStyles.landscape,
+    alt: "United Returnees Organisation members taking part in a community meeting in Uganda",
+    eyebrow: "Community",
+    label: "Conversations that make returning less isolating",
+    description: "Returnees connect, exchange experience and build trusted local relationships.",
+    className: galleryStyles.feature,
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 100vw, 58vw",
   },
   {
     src: "/images/uro/uro-office-visit.webp",
-    alt: "Two URO community members meeting at the organisation office",
-    label: "One-to-one connection",
+    alt: "Two URO community members meeting at the organisation office in Kampala",
+    eyebrow: "Connection",
+    label: "Practical support starts with listening",
+    description: "One-to-one conversations help URO understand each return journey more clearly.",
     className: galleryStyles.portrait,
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 40vw",
   },
   {
     src: "/images/uro/uro-returnee-team.webp",
-    alt: "URO team members wearing branded high-visibility vests",
-    label: "URO in the community",
-    className: galleryStyles.landscape,
-  },
-  {
-    src: "/images/uro/uro-team-outdoors.webp",
-    alt: "URO members and partners gathered outdoors",
-    label: "Building the network",
-    className: galleryStyles.landscape,
-  },
-  {
-    src: "/images/uro/uro-ribbon-cutting.webp",
-    alt: "Ribbon-cutting moment at a URO gathering in Kampala",
-    label: "A growing organisation",
-    className: galleryStyles.landscape,
+    alt: "United Returnees Organisation team members wearing URO branded vests",
+    eyebrow: "Outreach",
+    label: "Visible in the community",
+    description: "Building awareness, trust and pathways for Ugandans coming home.",
+    className: galleryStyles.standard,
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw",
   },
   {
     src: "/images/uro/uro-office-discussion.webp",
-    alt: "URO members in discussion around an office desk",
-    label: "Practical conversations",
-    className: galleryStyles.landscape,
+    alt: "URO members discussing returnee support at an office desk",
+    eyebrow: "Support",
+    label: "Turning questions into next steps",
+    description: "Practical discussions around settlement, opportunity and reintegration.",
+    className: galleryStyles.standard,
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw",
   },
   {
-    src: "/images/uro/uro-whatsapp-call.webp",
-    alt: "URO WhatsApp Call community programme poster",
-    label: "Community programming",
-    className: galleryStyles.poster,
+    src: "/images/uro/uro-ribbon-cutting.webp",
+    alt: "Ribbon-cutting at a United Returnees Organisation gathering in Kampala, Uganda",
+    eyebrow: "Milestones",
+    label: "A growing organisation for returnees",
+    description: "Building a stronger platform for Ugandans returning from across the diaspora.",
+    className: galleryStyles.standard,
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw",
   },
-];
+] as const;
 
 export default function Home() {
   return (
     <>
       <section className={heroStyles.hero}>
-        <img
+        <Image
           className={heroStyles.image}
           src="/images/uro/uro-team-office.webp"
-          alt="URO members and partners gathered at the organisation office in Kampala"
+          alt="United Returnees Organisation members and partners gathered at the URO office in Kampala"
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          quality={88}
         />
         <div className={heroStyles.overlay} />
 
@@ -138,7 +159,15 @@ export default function Home() {
       </section>
 
       <section className="photo-story">
-        <div className="photo-panel"><img src={COMMUNITY} alt="URO representatives and partners supporting returnees" loading="lazy" /></div>
+        <div className="photo-panel">
+          <Image
+            src="/images/uro/uro-team-outdoors.webp"
+            alt="URO members and partners gathered outdoors in Uganda"
+            fill
+            sizes="(max-width: 820px) 100vw, 58vw"
+            quality={84}
+          />
+        </div>
         <div className="story-panel">
           <span className="eyebrow">A community that understands</span>
           <h2>Your experience abroad is not lost. It can become part of Uganda&apos;s future.</h2>
@@ -152,15 +181,26 @@ export default function Home() {
           <div className={galleryStyles.header}>
             <div>
               <span className="eyebrow">URO in action</span>
-              <h2 id="uro-in-action-title">Return. Reconnect. Rebuild.</h2>
+              <h2 id="uro-in-action-title">Real people. Real return journeys.</h2>
             </div>
-            <p>Real moments from URO&apos;s growing returnee community — meetings, outreach, conversations and the relationships that make reintegration less isolating.</p>
+            <p>URO is built around human connection: listening, orientation, practical conversations and a growing network for Ugandans returning home.</p>
           </div>
+
           <div className={galleryStyles.grid}>
             {URO_MOMENTS.map((moment) => (
               <figure className={`${galleryStyles.card} ${moment.className}`} key={moment.src}>
-                <img src={moment.src} alt={moment.alt} loading="lazy" />
-                <figcaption>{moment.label}</figcaption>
+                <Image
+                  src={moment.src}
+                  alt={moment.alt}
+                  fill
+                  sizes={moment.sizes}
+                  quality={84}
+                />
+                <figcaption>
+                  <span className={galleryStyles.captionEyebrow}>{moment.eyebrow}</span>
+                  <strong>{moment.label}</strong>
+                  <small>{moment.description}</small>
+                </figcaption>
               </figure>
             ))}
           </div>
