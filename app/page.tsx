@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Icon } from "@/components/Icons";
 import { SectionHeading } from "@/components/SectionHeading";
 import { READINESS, SITE, SUPPORT_PATHWAYS } from "@/lib/site";
-import styles from "./home-gallery.module.css";
+import galleryStyles from "./home-gallery.module.css";
+import heroStyles from "./home-hero.module.css";
 
-const HERO = "https://diasporaaffairs.go.ug/assets/images/slides/return3.jpg";
 const COMMUNITY = "https://diasporaaffairs.go.ug/assets/images/slides/return1.jpg";
 
 const URO_MOMENTS = [
@@ -12,69 +12,104 @@ const URO_MOMENTS = [
     src: "/images/uro/uro-team-office.webp",
     alt: "URO members and partners gathered in the organisation office",
     label: "Community & connection",
-    className: styles.landscape,
+    className: galleryStyles.landscape,
   },
   {
     src: "/images/uro/uro-community-meeting.webp",
     alt: "URO members taking part in a community meeting",
     label: "Returnees in conversation",
-    className: styles.landscape,
+    className: galleryStyles.landscape,
   },
   {
     src: "/images/uro/uro-office-visit.webp",
     alt: "Two URO community members meeting at the organisation office",
     label: "One-to-one connection",
-    className: styles.portrait,
+    className: galleryStyles.portrait,
   },
   {
     src: "/images/uro/uro-returnee-team.webp",
     alt: "URO team members wearing branded high-visibility vests",
     label: "URO in the community",
-    className: styles.landscape,
+    className: galleryStyles.landscape,
   },
   {
     src: "/images/uro/uro-team-outdoors.webp",
     alt: "URO members and partners gathered outdoors",
     label: "Building the network",
-    className: styles.landscape,
+    className: galleryStyles.landscape,
   },
   {
     src: "/images/uro/uro-ribbon-cutting.webp",
     alt: "Ribbon-cutting moment at a URO gathering in Kampala",
     label: "A growing organisation",
-    className: styles.landscape,
+    className: galleryStyles.landscape,
   },
   {
     src: "/images/uro/uro-office-discussion.webp",
     alt: "URO members in discussion around an office desk",
     label: "Practical conversations",
-    className: styles.landscape,
+    className: galleryStyles.landscape,
   },
   {
     src: "/images/uro/uro-whatsapp-call.webp",
     alt: "URO WhatsApp Call community programme poster",
     label: "Community programming",
-    className: styles.poster,
+    className: galleryStyles.poster,
   },
 ];
 
 export default function Home() {
   return (
     <>
-      <section className="hero">
-        <img className="hero-image" src={HERO} alt="United Returnees Organisation Secretariat opening in Kampala" />
-        <div className="hero-overlay" />
-        <div className="container hero-content">
-          <span className="hero-kicker">For Ugandans planning to return — and those already home</span>
-          <h1>Every return deserves<br />a new beginning.</h1>
-          <p>URO connects Ugandans returning from the diaspora with trusted information, practical support, opportunity and a community that understands the journey.</p>
-          <div className="hero-actions">
-            <Link className="button" href="/join">Join URO — $100/year <Icon name="arrow" size={18} /></Link>
-            <Link className="button button-ghost" href="/contact">I need returnee support</Link>
+      <section className={heroStyles.hero}>
+        <div className={`container ${heroStyles.inner}`}>
+          <div className={heroStyles.copy}>
+            <span className={heroStyles.kicker}>United Returnees Organisation · Uganda</span>
+            <h1>Every return deserves a new beginning.</h1>
+            <p>
+              URO connects Ugandans returning from the diaspora with trusted information,
+              practical support, opportunity and a community that understands the journey.
+            </p>
+            <div className={heroStyles.actions}>
+              <Link className="button" href="/join">
+                Join URO — $100/year <Icon name="arrow" size={18} />
+              </Link>
+              <Link className={heroStyles.secondary} href="/contact">I need returnee support</Link>
+            </div>
+            <div className={heroStyles.audiences} aria-label="Who URO serves">
+              <span>Planning to return</span>
+              <span>Recently returned</span>
+              <span>Rebuilding in Uganda</span>
+            </div>
+          </div>
+
+          <div className={heroStyles.visual} aria-label="United Returnees Organisation community in Kampala">
+            <div className={heroStyles.flagLine} aria-hidden="true" />
+            <div className={heroStyles.mainPhoto}>
+              <img
+                src="/images/uro/uro-team-office.webp"
+                alt="URO members and partners gathered at the organisation office in Kampala"
+              />
+            </div>
+            <div className={heroStyles.secondaryPhoto}>
+              <img
+                src="/images/uro/uro-returnee-team.webp"
+                alt="URO team members wearing branded high-visibility vests"
+              />
+            </div>
+            <div className={heroStyles.caption}>
+              <strong>Return with a network behind you.</strong>
+              <span>Kampala-based support, community, trusted guidance and opportunity pathways.</span>
+            </div>
           </div>
         </div>
-        <div className="hero-strip">
-          <div className="container"><strong>Return.</strong><strong>Reconnect.</strong><strong>Rebuild.</strong></div>
+
+        <div className={heroStyles.strip}>
+          <div className={`container ${heroStyles.stripInner}`}>
+            <div><strong>Return.</strong><span>Prepare for coming home with better information.</span></div>
+            <div><strong>Reconnect.</strong><span>Build trusted local relationships and community.</span></div>
+            <div><strong>Rebuild.</strong><span>Move toward work, enterprise and productive investment.</span></div>
+          </div>
         </div>
       </section>
 
@@ -125,18 +160,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className={styles.section} aria-labelledby="uro-in-action-title">
+      <section className={galleryStyles.section} aria-labelledby="uro-in-action-title">
         <div className="container">
-          <div className={styles.header}>
+          <div className={galleryStyles.header}>
             <div>
               <span className="eyebrow">URO in action</span>
               <h2 id="uro-in-action-title">Return. Reconnect. Rebuild.</h2>
             </div>
             <p>Real moments from URO&apos;s growing returnee community — meetings, outreach, conversations and the relationships that make reintegration less isolating.</p>
           </div>
-          <div className={styles.grid}>
+          <div className={galleryStyles.grid}>
             {URO_MOMENTS.map((moment) => (
-              <figure className={`${styles.card} ${moment.className}`} key={moment.src}>
+              <figure className={`${galleryStyles.card} ${moment.className}`} key={moment.src}>
                 <img src={moment.src} alt={moment.alt} loading="lazy" />
                 <figcaption>{moment.label}</figcaption>
               </figure>
