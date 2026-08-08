@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./phase2.css";
+import "./phase3.css";
 import { Footer } from "@/components/Footer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
