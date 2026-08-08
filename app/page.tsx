@@ -1,7 +1,170 @@
 import Link from "next/link";
 import { Icon } from "@/components/Icons";
 import { SectionHeading } from "@/components/SectionHeading";
-import { READINESS,SITE,SUPPORT_PATHWAYS } from "@/lib/site";
-const HERO="https://diasporaaffairs.go.ug/assets/images/slides/return3.jpg";
-const COMMUNITY="https://diasporaaffairs.go.ug/assets/images/slides/return1.jpg";
-export default function Home(){return <><section className="hero"><img className="hero-image" src={HERO} alt="United Returnees Organisation Secretariat opening in Kampala"/><div className="hero-overlay"/><div className="container hero-content"><span className="hero-kicker">For Ugandans planning to return — and those already home</span><h1>Every return deserves<br/>a new beginning.</h1><p>URO connects Ugandans returning from the diaspora with trusted information, practical support, opportunity and a community that understands the journey.</p><div className="hero-actions"><Link className="button" href="/join">Join URO — $100/year <Icon name="arrow" size={18}/></Link><Link className="button button-ghost" href="/contact">I need returnee support</Link></div></div><div className="hero-strip"><div className="container"><strong>Return.</strong><strong>Reconnect.</strong><strong>Rebuild.</strong></div></div></section><section className="section intro-section"><div className="container two-col"><div><span className="eyebrow">United Returnees Organisation</span><h2>Coming home should not mean starting alone.</h2></div><div><p className="lead">URO is building a structured membership platform for Ugandans returning from the diaspora — whether you are preparing your move, looking for work, starting a business, investing or rebuilding after an unexpected return.</p><p>Our role is to help returnees navigate Uganda with better information, stronger connections and practical pathways into productive life.</p></div></div></section><section className="section section-soft"><div className="container"><SectionHeading eyebrow="How URO helps" title="Support for the realities of returning home" text="Practical pathways designed around the decisions returnees actually face." align="center"/><div className="card-grid">{SUPPORT_PATHWAYS.map(item=><article className="support-card" key={item.title}><div className="icon-box"><Icon name={item.icon}/></div><h3>{item.title}</h3><p>{item.text}</p><Link href="/services">Explore support <Icon name="arrow" size={16}/></Link></article>)}</div></div></section><section className="section readiness"><div className="container"><div className="readiness-head"><SectionHeading eyebrow="Returnee Readiness" title="Plan before you commit." text="A disciplined return starts with understanding the people, institutions, risks and opportunities around your plan."/><Link className="text-link" href="/resources">Open the Returnee Guide <Icon name="arrow" size={17}/></Link></div><div className="steps">{READINESS.map(r=><article key={r.step}><span>{r.step}</span><h3>{r.title}</h3><p>{r.text}</p></article>)}</div></div></section><section className="photo-story"><div className="photo-panel"><img src={COMMUNITY} alt="URO representatives and partners supporting returnees" loading="lazy"/></div><div className="story-panel"><span className="eyebrow">A community that understands</span><h2>Your experience abroad is not lost. It can become part of Uganda&apos;s future.</h2><p>URO exists to help returnees rebuild sustainable livelihoods, pursue entrepreneurship and productive investment, reconnect professionally and contribute meaningfully to Uganda&apos;s development.</p><Link className="button button-light" href="/about">About URO</Link></div></section><section className="section membership-cta"><div className="container membership-box"><div><span className="eyebrow">URO Membership</span><h2>Build your next chapter with a network behind you.</h2><p>Membership is open to Ugandans abroad planning to return and Ugandans who have already returned home.</p><ul className="feature-list"><li><Icon name="check"/>Personal returnee profile</li><li><Icon name="check"/>Member resources and opportunities</li><li><Icon name="check"/>Support requests and referrals</li><li><Icon name="check"/>Events, networking and community</li></ul></div><div className="price-card"><span>Annual membership</span><strong>${SITE.annualFeeUsd}</strong><small>USD / year</small><Link className="button" href="/join">Start membership</Link><Link className="text-link" href="/login">Already a member? Sign in</Link></div></div></section></>}
+import { READINESS, SITE, SUPPORT_PATHWAYS } from "@/lib/site";
+import styles from "./home-gallery.module.css";
+
+const HERO = "https://diasporaaffairs.go.ug/assets/images/slides/return3.jpg";
+const COMMUNITY = "https://diasporaaffairs.go.ug/assets/images/slides/return1.jpg";
+
+const URO_MOMENTS = [
+  {
+    src: "/images/uro/uro-team-office.webp",
+    alt: "URO members and partners gathered in the organisation office",
+    label: "Community & connection",
+    className: styles.landscape,
+  },
+  {
+    src: "/images/uro/uro-community-meeting.webp",
+    alt: "URO members taking part in a community meeting",
+    label: "Returnees in conversation",
+    className: styles.landscape,
+  },
+  {
+    src: "/images/uro/uro-office-visit.webp",
+    alt: "Two URO community members meeting at the organisation office",
+    label: "One-to-one connection",
+    className: styles.portrait,
+  },
+  {
+    src: "/images/uro/uro-returnee-team.webp",
+    alt: "URO team members wearing branded high-visibility vests",
+    label: "URO in the community",
+    className: styles.landscape,
+  },
+  {
+    src: "/images/uro/uro-team-outdoors.webp",
+    alt: "URO members and partners gathered outdoors",
+    label: "Building the network",
+    className: styles.landscape,
+  },
+  {
+    src: "/images/uro/uro-ribbon-cutting.webp",
+    alt: "Ribbon-cutting moment at a URO gathering in Kampala",
+    label: "A growing organisation",
+    className: styles.landscape,
+  },
+  {
+    src: "/images/uro/uro-office-discussion.webp",
+    alt: "URO members in discussion around an office desk",
+    label: "Practical conversations",
+    className: styles.landscape,
+  },
+  {
+    src: "/images/uro/uro-whatsapp-call.webp",
+    alt: "URO WhatsApp Call community programme poster",
+    label: "Community programming",
+    className: styles.poster,
+  },
+];
+
+export default function Home() {
+  return (
+    <>
+      <section className="hero">
+        <img className="hero-image" src={HERO} alt="United Returnees Organisation Secretariat opening in Kampala" />
+        <div className="hero-overlay" />
+        <div className="container hero-content">
+          <span className="hero-kicker">For Ugandans planning to return — and those already home</span>
+          <h1>Every return deserves<br />a new beginning.</h1>
+          <p>URO connects Ugandans returning from the diaspora with trusted information, practical support, opportunity and a community that understands the journey.</p>
+          <div className="hero-actions">
+            <Link className="button" href="/join">Join URO — $100/year <Icon name="arrow" size={18} /></Link>
+            <Link className="button button-ghost" href="/contact">I need returnee support</Link>
+          </div>
+        </div>
+        <div className="hero-strip">
+          <div className="container"><strong>Return.</strong><strong>Reconnect.</strong><strong>Rebuild.</strong></div>
+        </div>
+      </section>
+
+      <section className="section intro-section">
+        <div className="container two-col">
+          <div><span className="eyebrow">United Returnees Organisation</span><h2>Coming home should not mean starting alone.</h2></div>
+          <div>
+            <p className="lead">URO is building a structured membership platform for Ugandans returning from the diaspora — whether you are preparing your move, looking for work, starting a business, investing or rebuilding after an unexpected return.</p>
+            <p>Our role is to help returnees navigate Uganda with better information, stronger connections and practical pathways into productive life.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section-soft">
+        <div className="container">
+          <SectionHeading eyebrow="How URO helps" title="Support for the realities of returning home" text="Practical pathways designed around the decisions returnees actually face." align="center" />
+          <div className="card-grid">
+            {SUPPORT_PATHWAYS.map((item) => (
+              <article className="support-card" key={item.title}>
+                <div className="icon-box"><Icon name={item.icon} /></div>
+                <h3>{item.title}</h3><p>{item.text}</p>
+                <Link href="/services">Explore support <Icon name="arrow" size={16} /></Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section readiness">
+        <div className="container">
+          <div className="readiness-head">
+            <SectionHeading eyebrow="Returnee Readiness" title="Plan before you commit." text="A disciplined return starts with understanding the people, institutions, risks and opportunities around your plan." />
+            <Link className="text-link" href="/resources">Open the Returnee Guide <Icon name="arrow" size={17} /></Link>
+          </div>
+          <div className="steps">
+            {READINESS.map((r) => <article key={r.step}><span>{r.step}</span><h3>{r.title}</h3><p>{r.text}</p></article>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="photo-story">
+        <div className="photo-panel"><img src={COMMUNITY} alt="URO representatives and partners supporting returnees" loading="lazy" /></div>
+        <div className="story-panel">
+          <span className="eyebrow">A community that understands</span>
+          <h2>Your experience abroad is not lost. It can become part of Uganda&apos;s future.</h2>
+          <p>URO exists to help returnees rebuild sustainable livelihoods, pursue entrepreneurship and productive investment, reconnect professionally and contribute meaningfully to Uganda&apos;s development.</p>
+          <Link className="button button-light" href="/about">About URO</Link>
+        </div>
+      </section>
+
+      <section className={styles.section} aria-labelledby="uro-in-action-title">
+        <div className="container">
+          <div className={styles.header}>
+            <div>
+              <span className="eyebrow">URO in action</span>
+              <h2 id="uro-in-action-title">Return. Reconnect. Rebuild.</h2>
+            </div>
+            <p>Real moments from URO&apos;s growing returnee community — meetings, outreach, conversations and the relationships that make reintegration less isolating.</p>
+          </div>
+          <div className={styles.grid}>
+            {URO_MOMENTS.map((moment) => (
+              <figure className={`${styles.card} ${moment.className}`} key={moment.src}>
+                <img src={moment.src} alt={moment.alt} loading="lazy" />
+                <figcaption>{moment.label}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section membership-cta">
+        <div className="container membership-box">
+          <div>
+            <span className="eyebrow">URO Membership</span>
+            <h2>Build your next chapter with a network behind you.</h2>
+            <p>Membership is open to Ugandans abroad planning to return and Ugandans who have already returned home.</p>
+            <ul className="feature-list">
+              <li><Icon name="check" />Personal returnee profile</li>
+              <li><Icon name="check" />Member resources and opportunities</li>
+              <li><Icon name="check" />Support requests and referrals</li>
+              <li><Icon name="check" />Events, networking and community</li>
+            </ul>
+          </div>
+          <div className="price-card">
+            <span>Annual membership</span><strong>${SITE.annualFeeUsd}</strong><small>USD / year</small>
+            <Link className="button" href="/join">Start membership</Link>
+            <Link className="text-link" href="/login">Already a member? Sign in</Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
