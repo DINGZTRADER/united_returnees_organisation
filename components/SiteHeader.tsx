@@ -12,15 +12,36 @@ export function SiteHeader() {
     <header className="site-header">
       <div
         className="nav-shell"
-        style={{ width: "100%", paddingInline: "clamp(16px, 2.2vw, 32px)" }}
+        style={{
+          width: "100%",
+          position: "relative",
+          paddingLeft: "190px",
+          paddingRight: "clamp(16px, 2.2vw, 32px)",
+        }}
       >
-        <Link className="brand" href="/" aria-label="United Returnees Organisation home">
+        <Link
+          className="brand"
+          href="/"
+          aria-label="United Returnees Organisation home"
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            height: "84px",
+            width: "180px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            zIndex: 2,
+          }}
+        >
           <Image
             src="/images/uro-logo.png"
             alt="United Returnees Organisation"
             width={188}
             height={82}
             priority
+            style={{ width: "170px", height: "82px" }}
           />
         </Link>
 
