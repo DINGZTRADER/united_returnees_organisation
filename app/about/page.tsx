@@ -1,15 +1,32 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SITE } from "@/lib/site";
+import styles from "./about.module.css";
 
-const URO_EVENT = "/images/uro/uro-ribbon-cutting.webp";
-
-export const metadata = { title: "About URO" };
+export const metadata: Metadata = {
+  title: "About URO",
+  description:
+    "Learn about United Returnees Organisation and its work supporting Ugandan diaspora returnees through reintegration, community, livelihoods, entrepreneurship and productive investment.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About United Returnees Organisation",
+    description: "A bridge from return to renewal for Ugandans coming home from the diaspora.",
+    url: "/about",
+    images: [
+      {
+        url: "/images/uro/uro-ribbon-cutting.webp",
+        alt: "United Returnees Organisation gathering in Kampala",
+      },
+    ],
+  },
+};
 
 export default function About() {
   return <>
     <section className="page-hero"><div className="container"><span className="eyebrow">About URO</span><h1>A bridge from return to renewal.</h1><p>United Returnees Organisation is focused on reintegration, empowerment and socio-economic transformation for Ugandans returning home from the diaspora.</p></div></section>
-    <section className="section"><div className="container two-col balanced"><div><SectionHeading eyebrow="Our purpose" title="Helping returnees rebuild with dignity and direction"/><p>URO is developing practical programmes, partnerships and opportunities that help returnees settle comfortably, restore hope, establish sustainable livelihoods, pursue entrepreneurship and productive investment, and contribute meaningfully to Uganda&apos;s development.</p></div><div className="image-card"><img src={URO_EVENT} alt="Ribbon-cutting moment at a United Returnees Organisation gathering in Kampala" loading="lazy"/></div></div></section>
+    <section className="section"><div className="container two-col balanced"><div><SectionHeading eyebrow="Our purpose" title="Helping returnees rebuild with dignity and direction"/><p>URO is developing practical programmes, partnerships and opportunities that help returnees settle comfortably, restore hope, establish sustainable livelihoods, pursue entrepreneurship and productive investment, and contribute meaningfully to Uganda&apos;s development.</p></div><div className={styles.collage} aria-label="URO community and organisational moments"><figure className={styles.primary}><Image src="/images/uro/uro-ribbon-cutting.webp" alt="Ribbon-cutting at a United Returnees Organisation gathering in Kampala" fill sizes="(max-width: 900px) 100vw, 50vw" quality={84}/><figcaption>A growing platform for Ugandans returning home</figcaption></figure><figure className={styles.secondary}><Image src="/images/uro/uro-office-visit.webp" alt="URO community members meeting at the organisation office in Kampala" fill sizes="(max-width: 900px) 48vw, 22vw" quality={84}/></figure></div></div></section>
     <section className="section section-dark"><div className="container"><SectionHeading eyebrow="Public recognition" title="Working within Uganda's wider diaspora ecosystem" text="The opening of the URO Secretariat in Kampala was officiated by Mohammed Bagonza, Head of the State House Diaspora Unit and Patron of URO. The State House Diaspora Unit publicly commended URO's work on reintegration, empowerment, livelihoods, entrepreneurship and productive investment."/><a className="button button-light" href={SITE.publicRecognitionUrl} target="_blank" rel="noreferrer">Read the official Diaspora Affairs report</a></div></section>
     <section className="section"><div className="container"><SectionHeading eyebrow="Leadership" title="Built around accountable leadership" text="The full Board and management directory will be published as URO completes its official digital registration details."/><div className="leadership-grid"><article><div className="portrait-placeholder">ED</div><h3>Executive Director</h3><p>Denis Kalema</p></article><article><div className="portrait-placeholder">P</div><h3>Patron</h3><p>Mohammed Bagonza</p></article><article><div className="portrait-placeholder">PR</div><h3>President</h3><p>Lydia Mwesigwa</p></article><article><div className="portrait-placeholder">B</div><h3>Board & Management</h3><p>Official directory coming soon</p></article></div><p className="fine-print">Executive Director name is based on URO-provided information and requires final spelling confirmation. Other leadership references are based on public institutional reporting. The full Board directory remains subject to official confirmation.</p></div></section>
     <section className="section section-soft"><div className="container cta-row"><div><h2>Planning your return?</h2><p>Join the network before you arrive so you can prepare with better information and stronger local connections.</p></div><Link className="button" href="/join">Join URO</Link></div></section>

@@ -3,7 +3,7 @@ export const SITE = {
   shortName: "URO",
   tagline: "Return. Reconnect. Rebuild.",
   description:
-    "A membership and reintegration platform helping Ugandans returning from the diaspora access trusted information, practical support, opportunity and community.",
+    "United Returnees Organisation helps Ugandans planning to return or already back home access trusted reintegration support, practical information, opportunity and community.",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "256750038345",
   annualFeeUsd: 100,
   socialHandle: "@UNITEDRETURNEES",

@@ -1,0 +1,86 @@
+.collage {
+  position: relative;
+  min-height: 560px;
+}
+
+.collage figure {
+  margin: 0;
+  overflow: hidden;
+  background: #0a2f22;
+}
+
+.collage img {
+  object-fit: cover;
+}
+
+.primary {
+  position: absolute;
+  inset: 0 64px 42px 0;
+  border-radius: 26px;
+  box-shadow: 0 22px 54px rgba(10, 47, 34, .15);
+}
+
+.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 62%, rgba(4, 20, 14, .7));
+  pointer-events: none;
+}
+
+.primary figcaption {
+  position: absolute;
+  z-index: 2;
+  left: 24px;
+  right: 150px;
+  bottom: 22px;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  line-height: 1.25;
+}
+
+.secondary {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 44%;
+  aspect-ratio: 4 / 5;
+  border: 7px solid #fbfaf6;
+  border-radius: 22px;
+  box-shadow: 0 18px 46px rgba(10, 47, 34, .2);
+}
+
+.secondary img {
+  object-position: center 25%;
+}
+
+@media (max-width: 900px) {
+  .collage {
+    min-height: 500px;
+  }
+}
+
+@media (max-width: 640px) {
+  .collage {
+    min-height: 430px;
+  }
+
+  .primary {
+    inset: 0 34px 34px 0;
+    border-radius: 20px;
+  }
+
+  .secondary {
+    width: 42%;
+    border-width: 5px;
+    border-radius: 17px;
+  }
+
+  .primary figcaption {
+    left: 18px;
+    right: 92px;
+    bottom: 18px;
+    font-size: 1rem;
+  }
+}
