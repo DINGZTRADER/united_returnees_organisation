@@ -10,7 +10,10 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <div className="nav-shell header-shell">
+      <div
+        className="nav-shell"
+        style={{ width: "100%", paddingInline: "clamp(16px, 2.2vw, 32px)" }}
+      >
         <Link className="brand" href="/" aria-label="United Returnees Organisation home">
           <Image
             src="/images/uro-logo.png"
