@@ -6,7 +6,7 @@ export const SITE = {
     "A membership and reintegration platform helping Ugandans returning from the diaspora access trusted information, practical support, opportunity and community.",
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "256750038345",
   annualFeeUsd: 100,
-  socialHandle: "@unitedreturneesorganisationUg",
+  socialHandle: "@UNITEDRETURNEES",
   publicRecognitionUrl: "https://diasporaaffairs.go.ug/blog-single55.html",
 };
 
