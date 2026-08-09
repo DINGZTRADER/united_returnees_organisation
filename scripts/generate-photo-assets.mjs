@@ -18,12 +18,6 @@ const assets = [
     bytes: 6870,
     sha256: "3e2792ae3eae2922eb478843e0d710a914578d57baed8c21e8e18719b5f0a9df",
   },
-  {
-    prefix: "lydia2.part",
-    output: join(root, "public", "images", "uro", "lydia-mwesigwa.webp"),
-    bytes: 16276,
-    sha256: "80ed90f1842ce0c4a0ffad1c3669a6087862e9284fb56fc1b06c73dbf0b1d2e7",
-  },
 ];
 
 if (!existsSync(sourceDir)) {
