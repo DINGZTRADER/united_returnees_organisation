@@ -3,6 +3,11 @@
 import { FormEvent, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
+function safeInternalPath(value: string | null, fallback = "/dashboard") {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) return fallback;
+  return value;
+}
+
 export function LoginForm() {
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
@@ -24,9 +29,8 @@ export function LoginForm() {
       return;
     }
 
-    const requestedNext = new URLSearchParams(window.location.search).get("next") ?? "/dashboard";
-    const next = requestedNext.startsWith("/") ? requestedNext : "/dashboard";
-    window.location.assign(next);
+    const requestedNext = new URLSearchParams(window.location.search).get("next");
+    window.location.assign(safeInternalPath(requestedNext));
   }
 
   return (
