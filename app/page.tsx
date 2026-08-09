@@ -30,49 +30,49 @@ export const metadata: Metadata = {
 
 const URO_MOMENTS = [
   {
-    src: "/images/uro/uro-community-meeting.webp",
-    alt: "United Returnees Organisation members taking part in a community meeting in Uganda",
-    eyebrow: "Community",
-    label: "Conversations that make returning less isolating",
-    description: "Returnees connect, exchange experience and build trusted local relationships.",
-    className: galleryStyles.feature,
-    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw",
+    src: "/images/uro/pic2.webp",
+    alt: "URO representatives during an institutional visit at a migrant workers support centre in Uganda",
+    eyebrow: "Institutional engagement",
+    label: "Connecting returnee support with public-service pathways",
+    description: "URO engages with institutions working on migrant-worker, returnee and reintegration needs.",
+    className: galleryStyles.standard,
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 320px",
   },
   {
-    src: "/images/uro/uro-office-visit.webp",
-    alt: "URO community members meeting at the organisation office in Kampala",
-    eyebrow: "Connection",
-    label: "Practical support starts with listening",
-    description: "One-to-one conversations help URO understand each return journey more clearly.",
+    src: "/images/uro/pic3.webp",
+    alt: "URO representative during a stakeholder meeting in Uganda",
+    eyebrow: "Stakeholder relations",
+    label: "Building working relationships around reintegration",
+    description: "Direct stakeholder conversations can strengthen referrals, local knowledge and practical support for returnees.",
+    className: galleryStyles.standard,
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 320px",
+  },
+  {
+    src: "/images/uro/pic4.webp",
+    alt: "URO representative meeting a stakeholder in an office in Uganda",
+    eyebrow: "Partnership building",
+    label: "Turning introductions into practical referral pathways",
+    description: "URO is building relationships that can help returnees reach relevant services and institutional contacts.",
     className: galleryStyles.portrait,
-    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw",
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 320px",
   },
   {
-    src: "/images/uro/uro-returnee-team.webp",
-    alt: "United Returnees Organisation team members wearing URO branded vests",
-    eyebrow: "Outreach",
-    label: "Visible in the community",
-    description: "Building awareness, trust and pathways for Ugandans coming home.",
-    className: galleryStyles.standard,
-    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw",
+    src: "/images/uro/pic5.webp",
+    alt: "United Returnees Organisation members and visitors gathered at a URO office",
+    eyebrow: "Community",
+    label: "A growing network around Ugandans returning home",
+    description: "Members and visitors connect around shared experience, reintegration and rebuilding in Uganda.",
+    className: galleryStyles.portrait,
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 320px",
   },
   {
-    src: "/images/uro/uro-office-discussion.webp",
-    alt: "URO members discussing returnee support at an office desk",
-    eyebrow: "Support",
-    label: "Turning questions into next steps",
-    description: "Practical discussions around settlement, opportunity and reintegration.",
+    src: "/images/uro/uro-team-office-hq.webp",
+    alt: "United Returnees Organisation community members gathered at the URO office in Kampala",
+    eyebrow: "Returnee community",
+    label: "Practical conversations, local knowledge and support",
+    description: "URO brings people together to make the return journey less isolated and more informed.",
     className: galleryStyles.standard,
-    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw",
-  },
-  {
-    src: "/images/uro/uro-ribbon-cutting.webp",
-    alt: "Ribbon-cutting at a United Returnees Organisation gathering in Kampala, Uganda",
-    eyebrow: "Milestones",
-    label: "A growing organisation for returnees",
-    description: "Building a stronger platform for Ugandans returning from across the diaspora.",
-    className: galleryStyles.standard,
-    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw",
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 320px",
   },
 ] as const;
 
@@ -176,9 +176,9 @@ export default async function Home() {
           <div className={galleryStyles.header}>
             <div>
               <span className="eyebrow">URO in action</span>
-              <h2 id="uro-in-action-title">Real people. Real return journeys.</h2>
+              <h2 id="uro-in-action-title">Building the relationships returnees need.</h2>
             </div>
-            <p>URO is built around human connection: listening, orientation, practical conversations and a growing network for Ugandans returning home.</p>
+            <p>URO&apos;s work depends on human connection: listening to returnees, engaging institutions, strengthening referral pathways and building a practical network around the return journey.</p>
           </div>
 
           <div className={galleryStyles.grid}>
