@@ -1,6 +1,6 @@
 import { PaymentVerification } from "@/components/PaymentVerification";
 
-export const metadata = { title: "Membership Payment" };
+export const metadata = { title: "Membership Payment", robots: { index: false, follow: false } };
 
 export default async function PaymentComplete({
   searchParams,
