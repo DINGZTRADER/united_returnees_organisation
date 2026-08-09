@@ -3,7 +3,7 @@ import { AdminApplications } from "@/components/AdminApplications";
 import { LogoutButton } from "@/components/LogoutButton";
 import { createClient } from "@/lib/supabase/server";
 
-export const metadata = { title: "Admin Dashboard" };
+export const metadata = { title: "Admin Dashboard", robots: { index: false, follow: false } };
 
 export default async function Admin() {
   const supabase = await createClient();
