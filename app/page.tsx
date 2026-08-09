@@ -165,24 +165,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="photo-story">
-        <div className="photo-panel">
-          <Image
-            src="/images/uro/uro-team-story-hq.webp"
-            alt="United Returnees Organisation members in a working meeting at the URO office in Kampala"
-            fill
-            sizes="(max-width: 820px) 100vw, 58vw"
-            quality={100}
-          />
-        </div>
-        <div className="story-panel">
-          <span className="eyebrow">A community that understands</span>
-          <h2>Your experience abroad is not lost. It can become part of Uganda&apos;s future.</h2>
-          <p>URO exists to help returnees rebuild sustainable livelihoods, pursue entrepreneurship and productive investment, reconnect professionally and contribute meaningfully to Uganda&apos;s development.</p>
-          <Link className="button button-light" href="/about">About URO</Link>
-        </div>
-      </section>
-
       <section className={galleryStyles.section} aria-labelledby="uro-in-action-title">
         <div className="container">
           <div className={galleryStyles.header}>
