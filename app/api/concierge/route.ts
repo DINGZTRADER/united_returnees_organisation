@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 
-const AskSchema = z.object({ question: z.string().trim().min(2).max(500) });
+const AskSchema = z.object({
+  question: z.string().trim().min(2).max(500),
+  pagePath: z.string().trim().max(160).optional(),
+});
 
 type RouteLink = { label: string; href: string };
 type KnowledgeArticle = {
@@ -19,6 +22,17 @@ type KnowledgeArticle = {
   priority: number;
   verified_at: string;
   review_after: string | null;
+};
+
+type ConciergeOutcome = {
+  answer: string;
+  links: RouteLink[];
+  grounded: boolean;
+  confidence: "low" | "medium" | "high";
+  category?: string;
+  verifiedAt?: string;
+  disclaimer?: string | null;
+  sources: Array<{ name: string; url: string; kind: "uro" | "official"; verifiedAt: string }>;
 };
 
 const STOPWORDS = new Set([
@@ -42,6 +56,21 @@ const INTENTS = [
 
 function normalise(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9$ ]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function redactForAnalytics(value: string) {
+  return value
+    .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[email removed]")
+    .replace(/(?:\+?\d[\d\s().-]{7,}\d)/g, "[phone removed]")
+    .replace(/\b(?:\d[ -]*?){12,19}\b/g, "[number removed]")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 500);
+}
+
+function safePagePath(value?: string) {
+  if (!value || !value.startsWith("/") || value.startsWith("//")) return "/";
+  return value.slice(0, 160);
 }
 
 function termsFor(question: string) {
@@ -80,26 +109,51 @@ function isFresh(article: KnowledgeArticle) {
   return article.review_after >= new Date().toISOString().slice(0, 10);
 }
 
-function fallback(question: string) {
+function fallback(question: string): ConciergeOutcome {
   const q = normalise(question);
   const has = (...words: string[]) => words.some((word) => q.includes(word));
 
   if (has("job", "work", "career", "employment", "cv")) return {
     answer: "I do not yet have a verified article that answers that exact employment question. I can take you to URO employment support and the current Returnee Briefing instead.",
     links: [{ label: "Employment support", href: "/services#employment" }, { label: "Current opportunities", href: "/#returnee-briefing" }],
+    grounded: false, confidence: "low", sources: [], category: "Employment",
   };
   if (has("business", "company", "startup", "entrepreneur")) return {
     answer: "I do not have enough verified information to answer that exact business question yet. Start with URO business support and use official registration sources before committing money.",
     links: [{ label: "Business support", href: "/services#business-entrepreneurship" }, { label: "Returnee Briefing", href: "/#returnee-briefing" }],
+    grounded: false, confidence: "low", sources: [], category: "Business",
   };
   if (has("return", "relocate", "settle", "coming home")) return {
     answer: "I can help you plan the return, but I do not have a verified answer for that exact question yet. Start with settlement support and the Returnee Guide, or contact URO for personal guidance.",
     links: [{ label: "Settlement support", href: "/services#settlement-relocation" }, { label: "Returnee resources", href: "/resources" }, { label: "Contact URO", href: "/contact" }],
+    grounded: false, confidence: "low", sources: [], category: "Settlement",
   };
   return {
     answer: "I do not have a verified URO knowledge-base answer for that exact question yet. I can still guide you to the most relevant support area, or you can ask URO directly for personal guidance.",
     links: [{ label: "Returnee support", href: "/services" }, { label: "Returnee resources", href: "/resources" }, { label: "Contact URO", href: "/contact" }],
+    grounded: false, confidence: "low", sources: [],
   };
+}
+
+async function recordQuestion(
+  supabase: Awaited<ReturnType<typeof createClient>>,
+  question: string,
+  pagePath: string,
+  outcome: ConciergeOutcome,
+  matchedArticleId: string | null,
+) {
+  const redacted = redactForAnalytics(question);
+  if (redacted.length < 2) return;
+  await supabase.from("concierge_questions").insert({
+    question_redacted: redacted,
+    page_path: pagePath,
+    grounded: outcome.grounded,
+    confidence: outcome.confidence,
+    category: outcome.category ?? null,
+    matched_article_id: matchedArticleId,
+    review_status: "open",
+    reviewed_at: null,
+  });
 }
 
 export async function POST(request: Request) {
@@ -108,6 +162,8 @@ export async function POST(request: Request) {
   const parsed = AskSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: "Please enter a short question." }, { status: 422 });
 
+  const question = parsed.data.question;
+  const pagePath = safePagePath(parsed.data.pagePath);
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("knowledge_articles")
@@ -117,19 +173,21 @@ export async function POST(request: Request) {
     .limit(100);
 
   if (error || !data) {
-    const safe = fallback(parsed.data.question);
-    return NextResponse.json({ ...safe, grounded: false, sources: [], confidence: "low" });
+    const outcome = fallback(question);
+    await recordQuestion(supabase, question, pagePath, outcome, null);
+    return NextResponse.json(outcome);
   }
 
   const ranked = (data as KnowledgeArticle[])
     .filter(isFresh)
-    .map((article) => ({ article, score: scoreArticle(article, parsed.data.question) }))
+    .map((article) => ({ article, score: scoreArticle(article, question) }))
     .sort((a, b) => b.score - a.score);
 
   const best = ranked[0];
   if (!best || best.score < 4) {
-    const safe = fallback(parsed.data.question);
-    return NextResponse.json({ ...safe, grounded: false, sources: [], confidence: "low" });
+    const outcome = fallback(question);
+    await recordQuestion(supabase, question, pagePath, outcome, null);
+    return NextResponse.json(outcome);
   }
 
   const article = best.article;
@@ -138,8 +196,7 @@ export async function POST(request: Request) {
   if (!links.some((link) => link.href === sourceLink.href)) links.push(sourceLink);
 
   const highStake = ["Tax & compliance", "Documents", "Citizenship", "Investment", "Property & land"].includes(article.category);
-
-  return NextResponse.json({
+  const outcome: ConciergeOutcome = {
     answer: article.answer,
     grounded: true,
     confidence: best.score >= 16 ? "high" : "medium",
@@ -148,5 +205,8 @@ export async function POST(request: Request) {
     disclaimer: highStake ? "Requirements, fees and eligibility can change. Confirm the current position at the official source before acting." : null,
     sources: [{ name: article.source_name, url: article.source_url, kind: article.source_kind, verifiedAt: article.verified_at }],
     links,
-  });
+  };
+
+  await recordQuestion(supabase, question, pagePath, outcome, article.id);
+  return NextResponse.json(outcome);
 }
