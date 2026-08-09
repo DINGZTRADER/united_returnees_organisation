@@ -104,6 +104,21 @@
   background: #0a2f22;
 }
 
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 2px;
+  color: #123f2d;
+  font-size: .84rem;
+  font-weight: 800;
+  letter-spacing: .01em;
+}
+
+.socialLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 @media (max-width: 900px) {
   .collage {
     min-height: 500px;
