@@ -10,62 +10,43 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <div
-        className="nav-shell"
-        style={{
-          width: "100%",
-          position: "relative",
-          paddingLeft: "190px",
-          paddingRight: "clamp(16px, 2.2vw, 32px)",
-        }}
-      >
+      <div className="nav-shell" style={{ width: "100%", padding: "0 clamp(14px, 2vw, 28px)" }}>
         <Link
           className="brand"
           href="/"
           aria-label="United Returnees Organisation home"
           style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            height: "84px",
-            width: "180px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-start",
-            zIndex: 2,
+            flex: "0 0 76px",
+            width: "76px",
+            height: "76px",
+            display: "grid",
+            placeItems: "center",
+            background: "#fff",
+            borderRadius: "14px",
+            boxShadow: "0 4px 18px rgba(10,47,34,.10)",
           }}
         >
           <Image
             src="/images/uro-logo.png"
             alt="United Returnees Organisation"
-            width={188}
-            height={82}
+            width={220}
+            height={220}
             priority
-            style={{ width: "170px", height: "82px" }}
+            sizes="76px"
+            style={{ width: "68px", height: "68px", objectFit: "contain" }}
           />
         </Link>
 
-        <button
-          className="menu-button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle navigation"
-          aria-expanded={open}
-        >
+        <button className="menu-button" onClick={() => setOpen((v) => !v)} aria-label="Toggle navigation" aria-expanded={open}>
           <Icon name="menu" />
         </button>
 
         <nav className={open ? "nav-links open" : "nav-links"}>
           {NAV.map(([label, href]) => (
-            <Link key={href} href={href} onClick={() => setOpen(false)}>
-              {label}
-            </Link>
+            <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>
           ))}
-          <Link className="text-button" href="/login" onClick={() => setOpen(false)}>
-            Member Login
-          </Link>
-          <Link className="button button-sm" href="/join" onClick={() => setOpen(false)}>
-            Join URO
-          </Link>
+          <Link className="text-button" href="/login" onClick={() => setOpen(false)}>Member Login</Link>
+          <Link className="button button-sm" href="/join" onClick={() => setOpen(false)}>Join URO</Link>
         </nav>
       </div>
     </header>
