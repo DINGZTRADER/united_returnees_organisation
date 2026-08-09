@@ -4,6 +4,7 @@ import "./phase2.css";
 import "./phase3.css";
 import { Footer } from "@/components/Footer";
 import { SiteHeader } from "@/components/SiteHeader";
+import { UROConcierge } from "@/components/UROConcierge";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { SITE } from "@/lib/site";
 
@@ -74,5 +75,5 @@ const organisationJsonLd = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organisationJsonLd) }} /><SiteHeader /><main>{children}</main><Footer /><WhatsAppFloat /></body></html>;
+  return <html lang="en"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organisationJsonLd) }} /><SiteHeader /><main>{children}</main><Footer /><UROConcierge /><WhatsAppFloat /></body></html>;
 }
