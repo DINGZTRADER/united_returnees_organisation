@@ -37,7 +37,7 @@ export function ReturneeBriefing({ items }: { items: BriefingItem[] }) {
   const next = () => setIndex((current) => (current + 1) % count);
 
   return (
-    <section className={styles.section} aria-labelledby="returnee-briefing-title">
+    <section id="returnee-briefing" className={styles.section} aria-labelledby="returnee-briefing-title">
       <div className="container">
         <div className={styles.shell}>
           <div className={styles.flagLine} aria-hidden="true" />
