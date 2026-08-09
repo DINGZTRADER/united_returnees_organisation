@@ -5,7 +5,7 @@ import { MembershipPaymentButton } from "@/components/MembershipPaymentButton";
 import { SupportRequestForm } from "@/components/SupportRequestForm";
 import { createClient } from "@/lib/supabase/server";
 
-export const metadata = { title: "Member Dashboard" };
+export const metadata = { title: "Member Dashboard", robots: { index: false, follow: false } };
 
 function label(value: string | null | undefined) {
   if (!value) return "Not supplied";
@@ -24,12 +24,12 @@ export default async function Dashboard() {
 
   const [profileResult, supportResult, opportunitiesResult, applicationResult, membershipsResult, paymentsResult, receiptsResult] = await Promise.all([
     supabase.from("profiles").select("*").eq("id", user.id).maybeSingle(),
-    supabase.from("support_requests").select("id,created_at,category,subject,status").order("created_at", { ascending: false }).limit(6),
+    supabase.from("support_requests").select("id,created_at,category,subject,status").eq("member_id", user.id).order("created_at", { ascending: false }).limit(6),
     supabase.from("opportunities").select("id,title,category,summary,source_url,expires_at").eq("published", true).order("created_at", { ascending: false }).limit(6),
     supabase.from("membership_applications").select("id,status,reviewed_at,review_note").eq("user_id", user.id).order("created_at", { ascending: false }).limit(1).maybeSingle(),
-    supabase.from("memberships").select("id,status,period_start,period_end,paid_at,payment_reference").order("created_at", { ascending: false }).limit(4),
-    supabase.from("payment_transactions").select("id,created_at,tx_ref,amount,currency,status,payment_type").order("created_at", { ascending: false }).limit(5),
-    supabase.from("membership_receipts").select("id,receipt_number,amount,currency,issued_at").order("created_at", { ascending: false }).limit(5),
+    supabase.from("memberships").select("id,status,period_start,period_end,paid_at,payment_reference").eq("user_id", user.id).order("created_at", { ascending: false }).limit(4),
+    supabase.from("payment_transactions").select("id,created_at,tx_ref,amount,currency,status,payment_type").eq("user_id", user.id).order("created_at", { ascending: false }).limit(5),
+    supabase.from("membership_receipts").select("id,receipt_number,amount,currency,issued_at").eq("user_id", user.id).order("created_at", { ascending: false }).limit(5),
   ]);
 
   const profile = profileResult.data;
