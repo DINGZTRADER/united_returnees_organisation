@@ -89,6 +89,21 @@
   line-height: 1.5;
 }
 
+.leaderCard {
+  overflow: hidden;
+}
+
+.leaderPhoto {
+  width: calc(100% + 44px);
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  margin: -22px -22px 18px;
+  border-radius: 18px 18px 14px 14px;
+  background: #0a2f22;
+}
+
 @media (max-width: 900px) {
   .collage {
     min-height: 500px;
