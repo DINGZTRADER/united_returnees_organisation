@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@/components/Icons";
+import { ReturneeBriefing } from "@/components/ReturneeBriefing";
 import { SectionHeading } from "@/components/SectionHeading";
+import { getBriefingItems } from "@/lib/briefing";
 import { READINESS, SITE, SUPPORT_PATHWAYS } from "@/lib/site";
 import galleryStyles from "./home-gallery.module.css";
 import heroStyles from "./home-hero.module.css";
@@ -74,7 +76,9 @@ const URO_MOMENTS = [
   },
 ] as const;
 
-export default function Home() {
+export default async function Home() {
+  const briefingItems = await getBriefingItems();
+
   return (
     <>
       <section className={heroStyles.hero}>
@@ -152,6 +156,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ReturneeBriefing items={briefingItems} />
 
       <section className="section readiness">
         <div className="container">
