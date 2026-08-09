@@ -57,7 +57,7 @@ export function UROConcierge() {
       const response = await fetch("/api/concierge", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: clean }),
+        body: JSON.stringify({ question: clean, pagePath: pathname }),
       });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error ?? "Could not answer right now.");
