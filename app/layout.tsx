@@ -33,8 +33,8 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/uro/uro-team-office.webp",
-        alt: "United Returnees Organisation members and partners in Kampala, Uganda",
+        url: "/images/uro/uro-team-office-hq.webp",
+        alt: "United Returnees Organisation community gathering in Kampala, Uganda",
       },
     ],
   },
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE.name,
     description: SITE.description,
-    images: ["/images/uro/uro-team-office.webp"],
+    images: ["/images/uro/uro-team-office-hq.webp"],
   },
 };
 
@@ -53,7 +53,7 @@ const organisationJsonLd = {
   alternateName: SITE.shortName,
   url: SITE_URL,
   logo: `${SITE_URL}/images/uro-logo.png`,
-  image: `${SITE_URL}/images/uro/uro-team-office.webp`,
+  image: `${SITE_URL}/images/uro/uro-team-office-hq.webp`,
   description: SITE.description,
   areaServed: {
     "@type": "Country",
