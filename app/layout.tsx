@@ -75,5 +75,5 @@ const organisationJsonLd = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organisationJsonLd) }} /><SiteHeader /><main>{children}</main><Footer /><UROConcierge /><WhatsAppFloat /></body></html>;
+  return <html lang="en"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organisationJsonLd) }} /><SiteHeader /><main>{children}</main><Footer /><div id="ask-uro"><UROConcierge /></div><WhatsAppFloat /></body></html>;
 }
