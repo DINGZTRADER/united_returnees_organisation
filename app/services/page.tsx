@@ -2,5 +2,17 @@ import Link from "next/link";
 import { Icon } from "@/components/Icons";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SUPPORT_PATHWAYS } from "@/lib/site";
-export const metadata={title:"Returnee Support"};
-export default function Services(){return <><section className="page-hero"><div className="container"><span className="eyebrow">Returnee Support</span><h1>Practical help for the decisions that shape your return.</h1><p>From planning abroad to rebuilding at home, URO helps members find trustworthy information, relevant networks and practical pathways forward.</p></div></section><section className="section"><div className="container"><div className="service-list">{SUPPORT_PATHWAYS.map((item,i)=><article key={item.title}><span className="service-number">0{i+1}</span><div className="icon-box"><Icon name={item.icon}/></div><div><h2>{item.title}</h2><p>{item.text}</p><p className="muted">Support may be provided directly by URO or through referral to appropriate verified institutions and partners.</p></div></article>)}</div></div></section><section className="section section-dark"><div className="container cta-row"><div><SectionHeading eyebrow="Need help now?" title="You do not need to be a member to ask for support." text="If you are preparing to return, have recently arrived or are facing an urgent reintegration challenge, contact URO directly."/></div><Link className="button button-light" href="/contact">Request support</Link></div></section></>}
+
+export const metadata = { title: "Returnee Support" };
+
+function serviceId(title: string) {
+  return title.toLowerCase().replaceAll(" & ", "-").replaceAll(" ", "-");
+}
+
+export default function Services() {
+  return <>
+    <section className="page-hero"><div className="container"><span className="eyebrow">Returnee Support</span><h1>Practical help for the decisions that shape your return.</h1><p>From planning abroad to rebuilding at home, URO helps members find trustworthy information, relevant networks and practical pathways forward.</p></div></section>
+    <section className="section"><div className="container"><div className="service-list">{SUPPORT_PATHWAYS.map((item, i) => <article id={serviceId(item.title)} key={item.title}><span className="service-number">0{i + 1}</span><div className="icon-box"><Icon name={item.icon} /></div><div><h2>{item.title}</h2><p>{item.text}</p><p className="muted">Support may be provided directly by URO or through referral to appropriate verified institutions and partners.</p></div></article>)}</div></div></section>
+    <section className="section section-dark"><div className="container cta-row"><div><SectionHeading eyebrow="Need help now?" title="You do not need to be a member to ask for support." text="If you are preparing to return, have recently arrived or are facing an urgent reintegration challenge, contact URO directly." /></div><Link className="button button-light" href="/contact">Request support</Link></div></section>
+  </>;
+}
