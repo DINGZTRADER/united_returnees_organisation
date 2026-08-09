@@ -4,7 +4,7 @@ import { PrintReceiptButton } from "@/components/PrintReceiptButton";
 import { createClient } from "@/lib/supabase/server";
 import { SITE } from "@/lib/site";
 
-export const metadata = { title: "Membership Receipt" };
+export const metadata = { title: "Membership Receipt", robots: { index: false, follow: false } };
 
 function date(value: string | null | undefined) {
   if (!value) return "—";
