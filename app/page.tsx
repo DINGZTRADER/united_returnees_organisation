@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     url: "/",
     images: [
       {
-        url: "/images/uro/uro-team-office.webp",
-        alt: "United Returnees Organisation members and partners gathered in Kampala",
+        url: "/images/uro/uro-team-office-hq.webp",
+        alt: "United Returnees Organisation community gathering in Kampala, Uganda",
       },
     ],
   },
@@ -34,16 +34,16 @@ const URO_MOMENTS = [
     label: "Conversations that make returning less isolating",
     description: "Returnees connect, exchange experience and build trusted local relationships.",
     className: galleryStyles.feature,
-    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 100vw, 58vw",
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw",
   },
   {
     src: "/images/uro/uro-office-visit.webp",
-    alt: "Two URO community members meeting at the organisation office in Kampala",
+    alt: "URO community members meeting at the organisation office in Kampala",
     eyebrow: "Connection",
     label: "Practical support starts with listening",
     description: "One-to-one conversations help URO understand each return journey more clearly.",
     className: galleryStyles.portrait,
-    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 40vw",
+    sizes: "(max-width: 680px) 100vw, (max-width: 980px) 50vw, 33vw",
   },
   {
     src: "/images/uro/uro-returnee-team.webp",
@@ -78,37 +78,44 @@ export default function Home() {
   return (
     <>
       <section className={heroStyles.hero}>
-        <Image
-          className={heroStyles.image}
-          src="/images/uro/uro-team-office.webp"
-          alt="United Returnees Organisation members and partners gathered at the URO office in Kampala"
-          fill
-          priority
-          fetchPriority="high"
-          sizes="100vw"
-          quality={95}
-        />
-        <div className={heroStyles.overlay} />
+        <div className={`container ${heroStyles.heroGrid}`}>
+          <div className={heroStyles.content}>
+            <span className={heroStyles.kicker}>For Ugandans planning to return — and those already home</span>
+            <h1>Every return deserves a new beginning.</h1>
+            <p>
+              URO connects Ugandans returning from the diaspora with trusted information,
+              practical support, opportunity and a community that understands the journey.
+            </p>
 
-        <div className={`container ${heroStyles.content}`}>
-          <span className={heroStyles.kicker}>For Ugandans planning to return — and those already home</span>
-          <h1>Every return deserves a new beginning.</h1>
-          <p>
-            URO connects Ugandans returning from the diaspora with trusted information,
-            practical support, opportunity and a community that understands the journey.
-          </p>
+            <div className={heroStyles.actions}>
+              <Link className={`button ${heroStyles.primary}`} href="/join">
+                Join URO — $100/year <Icon name="arrow" size={18} />
+              </Link>
+              <Link className={heroStyles.secondary} href="/contact">I need returnee support</Link>
+            </div>
 
-          <div className={heroStyles.actions}>
-            <Link className={`button ${heroStyles.primary}`} href="/join">
-              Join URO — $100/year <Icon name="arrow" size={18} />
-            </Link>
-            <Link className={heroStyles.secondary} href="/contact">I need returnee support</Link>
+            <div className={heroStyles.proof} aria-label="URO member pathways">
+              <span>Planning to return</span>
+              <span>Recently returned</span>
+              <span>Rebuilding in Uganda</span>
+            </div>
           </div>
 
-          <div className={heroStyles.proof} aria-label="URO member pathways">
-            <span>Planning to return</span>
-            <span>Recently returned</span>
-            <span>Rebuilding in Uganda</span>
+          <div className={heroStyles.visual}>
+            <Image
+              src="/images/uro/uro-team-office-hq.webp"
+              alt="United Returnees Organisation community members gathered at the URO office in Kampala"
+              width={800}
+              height={600}
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 980px) 100vw, 620px"
+              quality={100}
+            />
+            <div className={heroStyles.visualNote}>
+              <span>United Returnees Organisation</span>
+              <span>Kampala · Uganda</span>
+            </div>
           </div>
         </div>
 
@@ -161,11 +168,11 @@ export default function Home() {
       <section className="photo-story">
         <div className="photo-panel">
           <Image
-            src="/images/uro/uro-team-outdoors.webp"
-            alt="URO members and partners gathered outdoors in Uganda"
+            src="/images/uro/uro-team-story-hq.webp"
+            alt="United Returnees Organisation members in a working meeting at the URO office in Kampala"
             fill
             sizes="(max-width: 820px) 100vw, 58vw"
-            quality={92}
+            quality={100}
           />
         </div>
         <div className="story-panel">
@@ -194,7 +201,7 @@ export default function Home() {
                   alt={moment.alt}
                   fill
                   sizes={moment.sizes}
-                  quality={92}
+                  quality={90}
                 />
                 <figcaption>
                   <span className={galleryStyles.captionEyebrow}>{moment.eyebrow}</span>
